@@ -45,6 +45,28 @@ class Teststatistics extends \Codeception\Platform\Extension
 		Events::STEP_AFTER   => 'afterStep'
 	);
 
+    /**
+     * Complete test files that should be ignored in statistics
+     *
+     * @var array
+     */
+	static $ignoredTestFileNames = [];
+
+    /**
+     * Tests which should be ignored in statistics
+     * Name of tests should be unique
+     *
+     * @var array
+     */
+	static $ignoredTestMethods = [];
+
+    /**
+     * Steps that should be ignored in statistics
+     *
+     * @var array
+     */
+	static $ignoredTestSteps = [];
+
 	// reset times and not performant tests arrays, in case multiple suites are launched
 	public function beforeSuite(SuiteEvent $e)
 	{
