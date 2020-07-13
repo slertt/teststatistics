@@ -110,9 +110,9 @@ class Teststatistics extends \Codeception\Platform\Extension
             $step->testMethod = $e->getTest()->getTestMethod();
             $step->name = $currentStep;
             $step->time = $stepTime;
-            $step->action = ($e->getStep()->getMetaStep() != null ? $e->getStep()->getMetaStep()->getAction() : '');
+            $step->action = ($e->getStep()->getMetaStep() !== null ? $e->getStep()->getMetaStep()->getAction() : $e->getTest()->getTestMethod());
             $step->actionURI = $e->getStep()->getArguments()[0];
-            $line = ($e->getStep()->getMetaStep() != null ? $e->getStep()->getMetaStep()->getLine() : '');
+            $line = ($e->getStep()->getMetaStep() !== null ? $e->getStep()->getMetaStep()->getLine() : '');
             $step->line = (int) filter_var($line, FILTER_SANITIZE_NUMBER_INT);
             self::$notPerformantStepsByTest[self::$tmpCurrentTest][] = $step;
         }
@@ -160,7 +160,7 @@ class Teststatistics extends \Codeception\Platform\Extension
                 $this->writeln("  ------------------------------------------");
                 foreach ($steps as $step)
                 {
-                    $this->writeln('    ' . $testname . ':' . $step->line . ' Action: ' . $step->action . ' URI: ' . $step->actionURI . ' (' . $step->time . 's)');
+                    $this->writeln('    ' . $testname . ':' . $step->line . ' Method: ' . $step->testMethod . ' URI: ' . $step->actionURI . ' (' . $step->time . 's)');
                 }
             }
         }
